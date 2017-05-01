@@ -63,6 +63,12 @@ public class Entry {
 	public void setMode(Mode mode) {
 		this.mode = mode;
 	}
+
+	@Override
+	public String toString() {
+		return "Entry [nameofBorrower=" + nameofBorrower + ", date=" + date + ", bookID=" + bookID + ", mode=" + mode
+				+ "]";
+	}
 	
 	
 	

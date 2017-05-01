@@ -7,13 +7,13 @@
     <artifactId>boundle</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>adam.pasztor.assignment</groupId>
   <artifactId>persist</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>persist</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jackson.version>2.8.8</jackson.version>
   </properties>
   <dependencies>
     <dependency>
@@ -26,6 +26,16 @@
     	<groupId>adam.pasztor.assignment</groupId>
     	<artifactId>service</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+	</dependency>
+    <dependency>
+    	<groupId>com.fasterxml.jackson.core</groupId>
+    	<artifactId>jackson-core</artifactId>
+    	<version>${jackson.version}</version>
     </dependency>
   </dependencies>
 </project>
