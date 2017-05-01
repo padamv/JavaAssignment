@@ -59,6 +59,13 @@ public class Finished {
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Finished [bookID=" + bookID + ", nameofBorrower=" + nameofBorrower + ", fromDate=" + fromDate
+				+ ", toDate=" + toDate + "]";
+	}
+	
 	
 		
 }
