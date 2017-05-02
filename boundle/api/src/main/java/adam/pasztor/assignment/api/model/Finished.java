@@ -70,6 +70,19 @@ public class Finished {
 		return "Finished [bookID=" + bookID + ", nameofBorrower=" + nameofBorrower + ", fromDate=" + form.format(fromDate)
 				+ ", toDate=" + form.format(toDate) + "]";
 	}
+
+	public boolean equals(Finished other) {
+		
+		
+		if (other==null)
+			return false;
+		
+		if (this.nameofBorrower.equals(other.getNameofBorrower()) && this.bookID.equals(other.getBookID()) && this.fromDate.equals(other.getFromDate()) && this.toDate.equals(other.getToDate()))
+			return true;
+		return false;
+		
+
+	}
 	
 	
 		

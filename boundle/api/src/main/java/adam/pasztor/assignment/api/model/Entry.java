@@ -16,6 +16,7 @@ public class Entry {
 	private Date date;
 	private String bookID;
 	private Mode mode;
+	private boolean isFinished;
 	
 	// constructors
 	
@@ -29,6 +30,7 @@ public class Entry {
 		this.date = date;
 		this.bookID = bookID;
 		this.mode = mode;
+		this.isFinished=false;
 	}
 	
 	// getters & setters
@@ -64,9 +66,17 @@ public class Entry {
 	public void setMode(Mode mode) {
 		this.mode = mode;
 	}
+	
+	public boolean getIsFinished(){
+		return isFinished;
+	}
+	
+	public void setIsFinished(boolean isFinished){
+		this.isFinished=isFinished;
+	}
 	//date formatting
 	
-	SimpleDateFormat form=new SimpleDateFormat ("yyyy.MM.dd. 'at' hh:mm:ss a");
+	SimpleDateFormat form=new SimpleDateFormat ("yyyy.MM.dd.");
 	
 	@Override
 	public String toString() {
