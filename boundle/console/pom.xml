@@ -7,7 +7,6 @@
     <artifactId>boundle</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>adam.pasztor.assignment</groupId>
   <artifactId>console</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>console</name>
@@ -33,4 +32,20 @@
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
+  <build>
+  <plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-remote-resources-plugin</artifactId>
+			<executions>
+				<!-- <execution> <goals> <goal>bundle</goal> </goals> </execution> -->
+			</executions>
+			<configuration>
+				<includes>
+					<include>${basedir}/src/main/resources/*</include>
+				</includes>
+			</configuration>
+		</plugin>
+	</plugins>
+	</build>
 </project>

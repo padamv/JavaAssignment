@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -16,6 +19,11 @@ import adam.pasztor.assignment.service.dao.EntryDAO;
 
 public class EntryDAOJSON implements EntryDAO {
 	
+	//LOGGER
+	
+	private Logger LOGGER= LogManager.getLogger(EntryDAOJSON.class);
+	
+	
 	// classvariables
 	
 	private File database;
@@ -24,7 +32,7 @@ public class EntryDAOJSON implements EntryDAO {
 	
 	public EntryDAOJSON(String databasePath) {
 		this.database = new File(databasePath);
-		System.out.println(database.getAbsolutePath());
+		LOGGER.debug(String.format("Entry Database: %s", database.getAbsolutePath()));
 	}
 
 	//methods
@@ -45,10 +53,9 @@ public class EntryDAOJSON implements EntryDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.fatal(String.format("IOException occured due to %s", e.getMessage()));
 		}
-		
+		LOGGER.info(String.format("Entry for the book (ID: %s) has been added!", entry.getBookID()));
 		
 
 	}
@@ -67,8 +74,7 @@ public class EntryDAOJSON implements EntryDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.fatal(String.format("IOException occured due to %s", e.getMessage()));
 		}
 		
 		Collection<Entry> result= new ArrayList<Entry>(Arrays.asList(entries));

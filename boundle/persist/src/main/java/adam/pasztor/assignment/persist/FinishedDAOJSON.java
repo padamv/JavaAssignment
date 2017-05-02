@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -15,6 +18,11 @@ import adam.pasztor.assignment.api.model.Finished;
 import adam.pasztor.assignment.service.dao.FinishedDAO;
 
 public class FinishedDAOJSON implements FinishedDAO {
+	
+	//LOGGER
+	
+	private Logger LOGGER= LogManager.getLogger(FinishedDAOJSON.class);
+	
 
 	// classvariables
 	
@@ -24,7 +32,7 @@ public class FinishedDAOJSON implements FinishedDAO {
 	
 	public FinishedDAOJSON(String databasePath) {
 		this.database = new File(databasePath);
-		System.out.println(database.getAbsolutePath());
+		LOGGER.debug(String.format("Finished Database: %s", database.getAbsolutePath()));
 	}
 	
 	//methods
@@ -44,10 +52,9 @@ public class FinishedDAOJSON implements FinishedDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.fatal(String.format("IOException occured due to %s", e.getMessage()));
 		}
-
+		LOGGER.info(String.format("History for the book (ID: %s) has been added!", finished.getBookID()));
 	}
 
 
@@ -65,8 +72,7 @@ public class FinishedDAOJSON implements FinishedDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.fatal(String.format("IOException occured due to %s", e.getMessage()));
 		}
 		
 		Collection<Finished> result= new ArrayList<Finished>(Arrays.asList(finisheds));
