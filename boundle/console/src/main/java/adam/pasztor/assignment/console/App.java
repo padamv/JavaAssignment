@@ -13,6 +13,7 @@ import adam.pasztor.assignment.api.model.Entry;
 import adam.pasztor.assignment.api.model.Finished;
 import adam.pasztor.assignment.api.service.EntryManagementService;
 import adam.pasztor.assignment.api.service.FinishedManagementService;
+import adam.pasztor.assignment.console.exceptions.NotBorrowableException;
 import adam.pasztor.assignment.persist.EntryDAOJSON;
 import adam.pasztor.assignment.persist.FinishedDAOJSON;
 import adam.pasztor.assignment.service.dao.EntryDAO;
@@ -109,6 +110,7 @@ public class App
     	
     	System.out.println("Book ID: ");
     	String bookID=br.readLine();
+    	boolean borrowable= isBorrowable(bookID);
     	
     	System.out.println("Action (BORROW/RETURN): ");
     		
@@ -118,8 +120,14 @@ public class App
     		System.out.println("Wrong action! Please give the action again (BORROW/RETURN): ");
     		action = br.readLine();
     	}
+    	try{
+    	if("BORROW".equals(action)&&!borrowable)
+    		throw new NotBorrowableException();
+    	}catch(NotBorrowableException e){
+    		System.err.println("Book is not in the library!");
+    		return;
+    	}
     	
-
     	if ("BORROW".equals(action))
     		mode=Entry.Mode.valueOf("BORROWED");
     	if ("RETURN".equals(action))
@@ -137,6 +145,8 @@ public class App
     	
     	Entry entry = new Entry(nameofBorrower, date, bookID, mode);
     	entryManager.addEntry(entry);
+    	
+
     }
         
         private static void listFinisheds(){
@@ -179,5 +189,21 @@ public class App
         		System.out.println(String.format("| %1$7s | %2$-16s | %3$10s | %4$10s |",finished.getBookID(), finished.getNameofBorrower(), df.format(finished.getFromDate()), df.format(finished.getToDate())));
         		printHorisontalLine(tableWidth);
         	}
+        }
+        
+        private static boolean isBorrowable(String bookID){
+        	int countBorrow=0;
+        	int countReturn=0;
+        	for (Entry entry:entryManager.listEntries()){
+        		if (bookID.equals(entry.getBookID())){
+        			if("BORROWED".equals(entry.getMode().toString()))
+        				countBorrow++;
+        			if("RETURNED".equals(entry.getMode().toString()))
+        				countReturn++;
+        		}
+        	}
+        	if (countBorrow==0||countBorrow==countReturn)
+        		return true;
+        	return false;
         }
 }
