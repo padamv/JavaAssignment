@@ -1,5 +1,6 @@
 package adam.pasztor.assignment.api.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Finished {
@@ -59,11 +60,15 @@ public class Finished {
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
 	}
-
+	
+	//date formatting
+	
+	SimpleDateFormat form=new SimpleDateFormat ("yyyy.MM.dd. 'at' hh:mm:ss a");
+	
 	@Override
 	public String toString() {
-		return "Finished [bookID=" + bookID + ", nameofBorrower=" + nameofBorrower + ", fromDate=" + fromDate
-				+ ", toDate=" + toDate + "]";
+		return "Finished [bookID=" + bookID + ", nameofBorrower=" + nameofBorrower + ", fromDate=" + form.format(fromDate)
+				+ ", toDate=" + form.format(toDate) + "]";
 	}
 	
 	
